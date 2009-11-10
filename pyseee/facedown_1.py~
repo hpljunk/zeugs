@@ -1,0 +1,8 @@
+import facebook
+fb = facebook.Facebook('YOUR_API_KEY', 'YOUR_SECRET_KEY')
+token = fb.auth.createToken()  #u'AUTH_TOKEN'
+fb.login()
+
+session = fb.auth.getSession()  #{u'secret': u'DESKTOP_SECRET', u'session_key': u'SESSION_KEY', u'uid': u'13608493', u'expires': 1181156943}
+user =  fb.users.getInfo([fb.uid], ['name', 'birthday'])
+#[{u'birthday': u'August 18, 1988', u'name': u'Samuel Cormier-Iijima', u'uid': 13608493}]
