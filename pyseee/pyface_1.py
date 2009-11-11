@@ -1,10 +1,27 @@
 # -*- coding: utf-8 -*-
-import locale,pickle
+import locale,pickle,os
+from facebook import Facebook
 language, output_encoding = locale.getdefaultlocale()
+
+#album = facebook.photos.getAlbums(uid,None)
+#photos = facebook.photos.get(uid,None,None)
+#events33 = facebook.events.get(uid,[])
+#evtppl = facebook.events.getMembers(eid) #all invited ppls
+#ptags = facebook.photos.getTags(pid)
+
+
+
+
+
+def get_album(uid):
+    album = facebook.photos.getAlbums(uid,NULL)
+
+
+
 
 
 def desktop_app():
-    from facebook import Facebook
+
     userdata = {}
 
     apiattr = ['uid', 'name', 'about_me', 'activities', 'birthday_date', 'relationship_status',
@@ -18,7 +35,8 @@ def desktop_app():
             'education_history', 'affiliations']
 
     # Get api_key and secret_key from a file
-    fbs = open('fbkeys.txt').readlines()
+    homedir = os.path.expanduser('~')
+    fbs = open(homedir + '/.fbkeys').readlines()
     facebook = Facebook(fbs[0].strip(), fbs[1].strip())
 
     file = open('fbdat_1.txt', 'w')
@@ -26,10 +44,11 @@ def desktop_app():
     facebook.auth.createToken()
     # Show login window
     facebook.login()
+    wait_login()                # somehow wait for the user to log in
 
     # Login to the window, then press enter
-    print 'After logging in, press enter...'
-    raw_input()
+    #print 'After logging in, press enter...'
+    #raw_input()
 
     facebook.auth.getSession()
     info = facebook.users.getInfo([facebook.uid], ['name', 'birthday', 'affiliations', 'sex'])[0]
