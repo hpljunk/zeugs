@@ -3,15 +3,6 @@ import locale,pickle,os
 from facebook import Facebook
 language, output_encoding = locale.getdefaultlocale()
 
-#album = facebook.photos.getAlbums(uid,None)
-#photos = facebook.photos.get(uid,None,None)
-#events33 = facebook.events.get(uid,[])
-#evtppl = facebook.events.getMembers(eid) #all invited ppls
-#ptags = facebook.photos.getTags(pid)
-
-
-
-
 
 def get_album(uid):
     album = facebook.photos.getAlbums(uid,NULL)

@@ -21,27 +21,44 @@ dat = facebook.users.getInfo(friends,apiattr)
 
 for da in dat: # put to dict
     userdata[da[u'uid']] = da
+str ='''
+##############################################################################
+#                               working!
+album = facebook.photos.getAlbums(uid,None)
+photos = facebook.photos.get(uid,None,None)
+events33 = facebook.events.get(uid,[])
+evtppl = facebook.events.getMembers(eid) #all invited ppls
+ptags = facebook.photos.getTags(pid)
+
+daten aller freunde vermischt
+statusquery = 'SELECT uid,status_id,message,time,source FROM status WHERE uid IN (SELECT uid2 FROM friend WHERE uid1=1056165140)'
+notesquery = 'SELECT uid,note_id,created_time, updated_time,content,title FROM note WHERE uid IN (SELECT uid2 FROM friend WHERE uid1=1056165140)'
+
+give back my connectrions:
+qcon = 'SELECT source_id, target_id, target_type,updated_time, is_following, is_deleted FROM connection WHERE source_id in (SELECT target_id FROM connection WHERE source_id=1056165140)'
+
+stream lesen (welcher eigentlich):
+SELECT post_id, actor_id, target_id, message FROM stream WHERE source_id in (SELECT target_id FROM connection WHERE source_id=1056165140)
+geht aber permissions fehlen!
+
+give back my connectrions from connection table:
+qcon = 'SELECT source_id, target_id, target_type,updated_time, is_following, is_deleted FROM connection WHERE source_id in (SELECT target_id FROM connection WHERE source_id=1056165140)'
 
 
 
-#
-'SELECT uid,status_id,message from status where uid in (select uid2 from friend where uid1= uid)'
+auslösen des querys:
+#res = facebook.fql.query(query)
 
-uidi=1229657643
- query = 'SELECT uid,status_id,message FROM status WHERE uid IN (SELECT uid FROM status WHERE uid = uidi)'
-
-my_events = app.fql('''select name from event
-                where eid in (select eid from event_member
-                where uid = 8112822)
-
-
-
-query = 'SELECT uid,status_id,message FROM status WHERE uid IN (SELECT uid2 FROM friend WHERE uid1=1317318580)'
-FacebookError: Error 604: Can't lookup all friends of 1317318580; can only lookup for the logged in user (1056165140) or for pairs of users
-
-query = 'SELECT uid,status_id,message FROM status WHERE uid IN (SELECT uid2 FROM friend WHERE uid1=1056165140)'
-No JSON object could be decoded
+###############################################################################
+#                               try outs
 
 
 
 
+
+
+
+
+
+
+'''
